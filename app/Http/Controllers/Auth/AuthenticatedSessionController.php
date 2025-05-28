@@ -25,6 +25,7 @@ class AuthenticatedSessionController extends Controller
             return response()->json([
                 'user' => $user,
                 'token' => $token,
+                'message' => 'Authentication successful.',
             ], 200);
         }
         return response()->json([
@@ -37,7 +38,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): JsonResponse
     {
-        Auth::guard('web')->logout();
+        $user = Auth::user();
+
+        $user->tokens()->delete();
 
         $request->session()->invalidate();
 
