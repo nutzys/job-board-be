@@ -15,9 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Seed premade data for Seniority, JobType, and Industry
+        $this->call([
+            SenioritySeeder::class,
+            JobTypeSeeder::class,
+            IndustrySeeder::class,
+            RoleSeeder::class,
         ]);
     }
 }
